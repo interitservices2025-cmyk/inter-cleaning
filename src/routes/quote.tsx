@@ -3,6 +3,7 @@ import { useState } from "react";
 import { ArrowRight, Check, ChevronLeft } from "lucide-react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { Reveal } from "@/components/Reveal";
 import { SERVICES, SITE } from "@/lib/site";
 import { toast } from "sonner";
 
@@ -61,15 +62,21 @@ function QuotePage() {
       <section className="relative bg-charcoal overflow-hidden diagonal-clip">
         <div className="absolute inset-0 bg-gradient-to-br from-magenta to-orange opacity-95" />
         <div className="relative z-10 max-w-4xl mx-auto px-6 py-20 md:py-28 text-center">
-          <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-yellow mb-4 block">
-            Free Quote
-          </span>
-          <h1 className="font-heading text-4xl md:text-6xl text-white font-bold tracking-tight leading-tight">
-            Tell us about your space.
-          </h1>
-          <p className="text-white/85 text-lg mt-6 max-w-xl mx-auto">
-            Three quick steps. Tailored estimate within 24 hours. No obligation.
-          </p>
+          <Reveal>
+            <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-yellow mb-4 block">
+              Free Quote
+            </span>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <h1 className="font-heading text-4xl md:text-6xl text-white font-bold tracking-tight leading-tight">
+              Tell us about your space.
+            </h1>
+          </Reveal>
+          <Reveal delay={0.2}>
+            <p className="text-white/85 text-lg mt-6 max-w-xl mx-auto">
+              Three quick steps. Tailored estimate within 24 hours. No obligation.
+            </p>
+          </Reveal>
         </div>
       </section>
 

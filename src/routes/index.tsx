@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Check, Sparkles, Clock, ShieldCheck, Star } from "lucide-react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
 import { SERVICES, SITE } from "@/lib/site";
 import heroImg from "@/assets/hero.jpg";
 
@@ -57,25 +58,31 @@ function HomePage() {
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 py-28 md:py-44">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/15 backdrop-blur text-white/90 text-[11px] font-semibold uppercase tracking-[0.25em] mb-8">
-              <Sparkles className="w-3.5 h-3.5 text-yellow" />
-              Serving the Greater Toronto Area
-            </div>
-            <h1 className="font-heading text-5xl md:text-7xl lg:text-8xl text-white font-bold leading-[0.95] tracking-tight mb-8">
-              Excellence in <span className="text-yellow italic font-semibold">Every</span>
-              <br />
-              Sweep.
-            </h1>
-            <p className="text-white/90 text-lg md:text-xl max-w-xl mb-12 leading-relaxed">
-              Premium cleaning services across the GTA. We bring precision, energy and a
-              sparkling finish to every space we touch.
-            </p>
+            <Reveal>
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/15 backdrop-blur text-white/90 text-[11px] font-semibold uppercase tracking-[0.25em] mb-8">
+                <Sparkles className="w-3.5 h-3.5 text-yellow" />
+                Serving the Greater Toronto Area
+              </div>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <h1 className="font-heading text-5xl md:text-7xl lg:text-8xl text-white font-bold leading-[0.95] tracking-tight mb-8">
+                Excellence in <span className="text-yellow italic font-semibold">Every</span>
+                <br />
+                Sweep.
+              </h1>
+            </Reveal>
+            <Reveal delay={0.2}>
+              <p className="text-white/90 text-lg md:text-xl max-w-xl mb-12 leading-relaxed">
+                Premium cleaning services across the GTA. We bring precision, energy and a
+                sparkling finish to every space we touch.
+              </p>
+            </Reveal>
             <div className="flex flex-wrap gap-4">
               <Link
                 to="/quote"
-                className="group bg-white text-magenta py-4 pr-5 pl-6 flex items-center gap-2 rounded-full text-sm font-bold uppercase tracking-wider hover:bg-yellow hover:text-charcoal transition-all"
+                className="group bg-white text-magenta py-4 pr-5 pl-6 flex items-center gap-2 rounded-full text-sm font-bold tracking-wide hover:bg-yellow hover:text-charcoal transition-all"
               >
-                Get Your Free Quote
+                Get a quote in under 24 hours!
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </Link>
               <Link
@@ -129,29 +136,30 @@ function HomePage() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <Stagger className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {SERVICES.map((s, i) => (
-              <Link
-                key={s.slug}
-                to="/services/$slug"
-                params={{ slug: s.slug }}
-                className={`group bg-white p-8 rounded-3xl ring-1 ring-charcoal/5 flex flex-col h-full hover:-translate-y-1 transition-all ${ACCENT_RING[s.accent]}`}
-              >
-                <div className="flex items-center justify-between mb-6">
-                  <div
-                    className={`w-14 h-14 rounded-2xl flex items-center justify-center ${ACCENT_BG[s.accent]}`}
-                  >
-                    <span className="font-heading font-bold text-lg">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
+              <StaggerItem key={s.slug}>
+                <Link
+                  to="/services/$slug"
+                  params={{ slug: s.slug }}
+                  className={`group bg-white p-8 rounded-3xl ring-1 ring-charcoal/5 flex flex-col h-full hover:-translate-y-1 transition-all ${ACCENT_RING[s.accent]}`}
+                >
+                  <div className="flex items-center justify-between mb-6">
+                    <div
+                      className={`w-14 h-14 rounded-2xl flex items-center justify-center ${ACCENT_BG[s.accent]}`}
+                    >
+                      <span className="font-heading font-bold text-lg">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                    </div>
+                    <ArrowRight className="w-5 h-5 text-charcoal/30 group-hover:text-magenta group-hover:translate-x-1 transition-all" />
                   </div>
-                  <ArrowRight className="w-5 h-5 text-charcoal/30 group-hover:text-magenta group-hover:translate-x-1 transition-all" />
-                </div>
-                <h3 className="font-heading text-xl font-bold mb-3 leading-tight">{s.name}</h3>
-                <p className="text-sm text-charcoal/60 leading-relaxed">{s.short}</p>
-              </Link>
+                  <h3 className="font-heading text-xl font-bold mb-3 leading-tight">{s.name}</h3>
+                  <p className="text-sm text-charcoal/60 leading-relaxed">{s.short}</p>
+                </Link>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </div>
       </section>
 
@@ -164,7 +172,7 @@ function HomePage() {
           <h2 className="font-heading text-4xl md:text-5xl font-bold mb-20 max-w-2xl">
             Built on three uncompromising values.
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
+          <Stagger className="grid grid-cols-1 md:grid-cols-3 gap-16" stagger={0.15}>
             {[
               {
                 num: "01",
@@ -185,7 +193,7 @@ function HomePage() {
                 color: "text-yellow",
               },
             ].map((p) => (
-              <div key={p.num} className="relative pt-8">
+              <StaggerItem key={p.num} className="relative pt-8">
                 <span
                   className={`absolute -top-4 -left-2 text-8xl font-heading font-bold opacity-15 ${p.color}`}
                 >
@@ -193,9 +201,9 @@ function HomePage() {
                 </span>
                 <h3 className="font-heading text-2xl font-bold mb-4 relative">{p.title}</h3>
                 <p className="text-white/60 leading-relaxed max-w-sm">{p.desc}</p>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </div>
       </section>
 
@@ -210,14 +218,14 @@ function HomePage() {
               A seamless three-step process.
             </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+          <Stagger className="grid grid-cols-1 md:grid-cols-3 gap-8 relative" stagger={0.18}>
             <div className="absolute top-10 left-[16%] right-[16%] h-px bg-gradient-to-r from-magenta via-orange to-yellow hidden md:block" />
             {[
               { n: 1, t: "Request a Quote", d: "Tell us about your space. Get a tailored estimate within 24h." },
               { n: 2, t: "We Customize a Plan", d: "Frequency, scope and schedule — built around your routine." },
               { n: 3, t: "Sit Back & Sparkle", d: "Our team handles the rest. You enjoy a spotless space." },
             ].map((step, i) => (
-              <div key={step.n} className="text-center relative bg-white px-4">
+              <StaggerItem key={step.n} className="text-center relative bg-white px-4">
                 <div
                   className={`w-20 h-20 rounded-full mx-auto mb-6 flex items-center justify-center font-heading font-bold text-2xl text-white shadow-[0_15px_40px_-10px_rgba(220,13,115,0.4)] ${
                     i === 0 ? "bg-magenta" : i === 1 ? "bg-orange" : "bg-yellow text-charcoal"
@@ -227,16 +235,16 @@ function HomePage() {
                 </div>
                 <h3 className="font-heading text-xl font-bold mb-3">{step.t}</h3>
                 <p className="text-charcoal/60 leading-relaxed max-w-xs mx-auto">{step.d}</p>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </div>
       </section>
 
       {/* TESTIMONIALS */}
       <section className="py-28 bg-zinc-50">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <Stagger className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               {
                 q: "The team is punctual, thorough and genuinely cares about the details. Our condo has never looked better.",
@@ -254,25 +262,24 @@ function HomePage() {
                 r: "Tenant, Brampton",
               },
             ].map((t, i) => (
-              <figure
-                key={i}
-                className="bg-white p-8 rounded-3xl ring-1 ring-charcoal/5 flex flex-col"
-              >
-                <div className="flex gap-0.5 mb-4">
-                  {Array.from({ length: 5 }).map((_, j) => (
-                    <Star key={j} className="w-4 h-4 fill-yellow text-yellow" />
-                  ))}
-                </div>
-                <blockquote className="text-charcoal/80 leading-relaxed mb-6 flex-1">
-                  &ldquo;{t.q}&rdquo;
-                </blockquote>
-                <figcaption>
-                  <div className="font-bold text-sm">{t.n}</div>
-                  <div className="text-xs text-charcoal/50 mt-1">{t.r}</div>
-                </figcaption>
-              </figure>
+              <StaggerItem key={i}>
+                <figure className="bg-white p-8 rounded-3xl ring-1 ring-charcoal/5 flex flex-col h-full">
+                  <div className="flex gap-0.5 mb-4">
+                    {Array.from({ length: 5 }).map((_, j) => (
+                      <Star key={j} className="w-4 h-4 fill-yellow text-yellow" />
+                    ))}
+                  </div>
+                  <blockquote className="text-charcoal/80 leading-relaxed mb-6 flex-1">
+                    &ldquo;{t.q}&rdquo;
+                  </blockquote>
+                  <figcaption>
+                    <div className="font-bold text-sm">{t.n}</div>
+                    <div className="text-xs text-charcoal/50 mt-1">{t.r}</div>
+                  </figcaption>
+                </figure>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </div>
       </section>
 
@@ -293,9 +300,9 @@ function HomePage() {
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Link
                   to="/quote"
-                  className="bg-white text-magenta py-4 px-10 rounded-full font-bold uppercase tracking-wider text-sm hover:bg-charcoal hover:text-white transition-colors"
+                  className="bg-white text-magenta py-4 px-10 rounded-full font-bold tracking-wide text-sm hover:bg-charcoal hover:text-white transition-colors"
                 >
-                  Get Your Free Quote
+                  Get a quote in under 24 hours!
                 </Link>
                 <a
                   href={SITE.phoneHref}

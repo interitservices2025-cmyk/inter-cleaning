@@ -11,7 +11,8 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as QuoteRouteImport } from './routes/quote'
 import { Route as ContactRouteImport } from './routes/contact'
-import { Route as AboutRouteImport } from './routes/about'
+import { Route as CompanyRouteImport } from './routes/company'
+import { Route as CareerRouteImport } from './routes/career'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicesIndexRouteImport } from './routes/services.index'
 import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
@@ -26,9 +27,14 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AboutRoute = AboutRouteImport.update({
-  id: '/about',
-  path: '/about',
+const CompanyRoute = CompanyRouteImport.update({
+  id: '/company',
+  path: '/company',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CareerRoute = CareerRouteImport.update({
+  id: '/career',
+  path: '/career',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -49,7 +55,8 @@ const ServicesSlugRoute = ServicesSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
+  '/career': typeof CareerRoute
+  '/company': typeof CompanyRoute
   '/contact': typeof ContactRoute
   '/quote': typeof QuoteRoute
   '/services/$slug': typeof ServicesSlugRoute
@@ -57,7 +64,8 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
+  '/career': typeof CareerRoute
+  '/company': typeof CompanyRoute
   '/contact': typeof ContactRoute
   '/quote': typeof QuoteRoute
   '/services/$slug': typeof ServicesSlugRoute
@@ -66,7 +74,8 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
+  '/career': typeof CareerRoute
+  '/company': typeof CompanyRoute
   '/contact': typeof ContactRoute
   '/quote': typeof QuoteRoute
   '/services/$slug': typeof ServicesSlugRoute
@@ -76,17 +85,26 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/about'
+    | '/career'
+    | '/company'
     | '/contact'
     | '/quote'
     | '/services/$slug'
     | '/services/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/contact' | '/quote' | '/services/$slug' | '/services'
+  to:
+    | '/'
+    | '/career'
+    | '/company'
+    | '/contact'
+    | '/quote'
+    | '/services/$slug'
+    | '/services'
   id:
     | '__root__'
     | '/'
-    | '/about'
+    | '/career'
+    | '/company'
     | '/contact'
     | '/quote'
     | '/services/$slug'
@@ -95,7 +113,8 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AboutRoute: typeof AboutRoute
+  CareerRoute: typeof CareerRoute
+  CompanyRoute: typeof CompanyRoute
   ContactRoute: typeof ContactRoute
   QuoteRoute: typeof QuoteRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
@@ -118,11 +137,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutRouteImport
+    '/company': {
+      id: '/company'
+      path: '/company'
+      fullPath: '/company'
+      preLoaderRoute: typeof CompanyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/career': {
+      id: '/career'
+      path: '/career'
+      fullPath: '/career'
+      preLoaderRoute: typeof CareerRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -151,7 +177,8 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AboutRoute: AboutRoute,
+  CareerRoute: CareerRoute,
+  CompanyRoute: CompanyRoute,
   ContactRoute: ContactRoute,
   QuoteRoute: QuoteRoute,
   ServicesSlugRoute: ServicesSlugRoute,

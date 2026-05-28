@@ -2,6 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowRight, Check, Phone } from "lucide-react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
 import { getService, SERVICES, SITE } from "@/lib/site";
 
 export const Route = createFileRoute("/services/$slug")({
@@ -60,16 +61,22 @@ function ServiceDetail() {
         />
         <div className="absolute inset-0 bg-gradient-to-br from-magenta/95 to-orange/85 mix-blend-multiply" />
         <div className="relative z-10 max-w-7xl mx-auto px-6 py-24 md:py-32">
-          <Link
-            to="/services"
-            className="text-yellow text-[11px] font-bold uppercase tracking-[0.3em] hover:underline"
-          >
-            ← All services
-          </Link>
-          <h1 className="font-heading text-4xl md:text-6xl text-white font-bold tracking-tight mt-6 max-w-3xl">
-            {s.name}
-          </h1>
-          <p className="text-white/90 text-lg md:text-xl mt-6 max-w-2xl">{s.short}</p>
+          <Reveal>
+            <Link
+              to="/services"
+              className="text-yellow text-[11px] font-bold uppercase tracking-[0.3em] hover:underline"
+            >
+              ← All services
+            </Link>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <h1 className="font-heading text-4xl md:text-6xl text-white font-bold tracking-tight mt-6 max-w-3xl">
+              {s.name}
+            </h1>
+          </Reveal>
+          <Reveal delay={0.2}>
+            <p className="text-white/90 text-lg md:text-xl mt-6 max-w-2xl">{s.short}</p>
+          </Reveal>
         </div>
       </section>
 
@@ -101,9 +108,9 @@ function ServiceDetail() {
               </p>
               <Link
                 to="/quote"
-                className="block w-full text-center bg-gradient-brand text-white py-3 px-6 rounded-full text-sm font-bold uppercase tracking-wider mb-3"
+                className="block w-full text-center bg-gradient-brand text-white py-3 px-6 rounded-full text-[12px] font-bold tracking-wide mb-3"
               >
-                Free Quote
+                Get a quote in under 24 hours!
               </Link>
               <a
                 href={SITE.phoneHref}
@@ -118,23 +125,26 @@ function ServiceDetail() {
 
       <section className="py-24 bg-zinc-50">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="font-heading text-3xl font-bold mb-12">Other services</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <Reveal>
+            <h2 className="font-heading text-3xl font-bold mb-12">Other services</h2>
+          </Reveal>
+          <Stagger className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {others.map((o) => (
-              <Link
-                key={o.slug}
-                to="/services/$slug"
-                params={{ slug: o.slug }}
-                className="group bg-white p-8 rounded-3xl ring-1 ring-charcoal/5 hover:-translate-y-1 transition-all"
-              >
-                <h3 className="font-heading text-xl font-bold mb-3">{o.name}</h3>
-                <p className="text-sm text-charcoal/60 mb-6">{o.short}</p>
-                <span className="text-magenta font-bold text-sm uppercase tracking-wider flex items-center gap-2">
-                  Learn more <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </span>
-              </Link>
+              <StaggerItem key={o.slug}>
+                <Link
+                  to="/services/$slug"
+                  params={{ slug: o.slug }}
+                  className="group bg-white p-8 rounded-3xl ring-1 ring-charcoal/5 hover:-translate-y-1 transition-all block h-full"
+                >
+                  <h3 className="font-heading text-xl font-bold mb-3">{o.name}</h3>
+                  <p className="text-sm text-charcoal/60 mb-6">{o.short}</p>
+                  <span className="text-magenta font-bold text-sm uppercase tracking-wider flex items-center gap-2">
+                    Learn more <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </span>
+                </Link>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </div>
       </section>
 
