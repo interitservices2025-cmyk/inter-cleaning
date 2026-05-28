@@ -172,7 +172,7 @@ function HomePage() {
           <h2 className="font-heading text-4xl md:text-5xl font-bold mb-20 max-w-2xl">
             Built on three uncompromising values.
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
+          <Stagger className="grid grid-cols-1 md:grid-cols-3 gap-16" stagger={0.15}>
             {[
               {
                 num: "01",
@@ -193,7 +193,7 @@ function HomePage() {
                 color: "text-yellow",
               },
             ].map((p) => (
-              <div key={p.num} className="relative pt-8">
+              <StaggerItem key={p.num} className="relative pt-8">
                 <span
                   className={`absolute -top-4 -left-2 text-8xl font-heading font-bold opacity-15 ${p.color}`}
                 >
@@ -201,9 +201,9 @@ function HomePage() {
                 </span>
                 <h3 className="font-heading text-2xl font-bold mb-4 relative">{p.title}</h3>
                 <p className="text-white/60 leading-relaxed max-w-sm">{p.desc}</p>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </div>
       </section>
 
@@ -218,14 +218,14 @@ function HomePage() {
               A seamless three-step process.
             </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+          <Stagger className="grid grid-cols-1 md:grid-cols-3 gap-8 relative" stagger={0.18}>
             <div className="absolute top-10 left-[16%] right-[16%] h-px bg-gradient-to-r from-magenta via-orange to-yellow hidden md:block" />
             {[
               { n: 1, t: "Request a Quote", d: "Tell us about your space. Get a tailored estimate within 24h." },
               { n: 2, t: "We Customize a Plan", d: "Frequency, scope and schedule — built around your routine." },
               { n: 3, t: "Sit Back & Sparkle", d: "Our team handles the rest. You enjoy a spotless space." },
             ].map((step, i) => (
-              <div key={step.n} className="text-center relative bg-white px-4">
+              <StaggerItem key={step.n} className="text-center relative bg-white px-4">
                 <div
                   className={`w-20 h-20 rounded-full mx-auto mb-6 flex items-center justify-center font-heading font-bold text-2xl text-white shadow-[0_15px_40px_-10px_rgba(220,13,115,0.4)] ${
                     i === 0 ? "bg-magenta" : i === 1 ? "bg-orange" : "bg-yellow text-charcoal"
@@ -235,16 +235,16 @@ function HomePage() {
                 </div>
                 <h3 className="font-heading text-xl font-bold mb-3">{step.t}</h3>
                 <p className="text-charcoal/60 leading-relaxed max-w-xs mx-auto">{step.d}</p>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </div>
       </section>
 
       {/* TESTIMONIALS */}
       <section className="py-28 bg-zinc-50">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <Stagger className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               {
                 q: "The team is punctual, thorough and genuinely cares about the details. Our condo has never looked better.",
@@ -262,25 +262,24 @@ function HomePage() {
                 r: "Tenant, Brampton",
               },
             ].map((t, i) => (
-              <figure
-                key={i}
-                className="bg-white p-8 rounded-3xl ring-1 ring-charcoal/5 flex flex-col"
-              >
-                <div className="flex gap-0.5 mb-4">
-                  {Array.from({ length: 5 }).map((_, j) => (
-                    <Star key={j} className="w-4 h-4 fill-yellow text-yellow" />
-                  ))}
-                </div>
-                <blockquote className="text-charcoal/80 leading-relaxed mb-6 flex-1">
-                  &ldquo;{t.q}&rdquo;
-                </blockquote>
-                <figcaption>
-                  <div className="font-bold text-sm">{t.n}</div>
-                  <div className="text-xs text-charcoal/50 mt-1">{t.r}</div>
-                </figcaption>
-              </figure>
+              <StaggerItem key={i}>
+                <figure className="bg-white p-8 rounded-3xl ring-1 ring-charcoal/5 flex flex-col h-full">
+                  <div className="flex gap-0.5 mb-4">
+                    {Array.from({ length: 5 }).map((_, j) => (
+                      <Star key={j} className="w-4 h-4 fill-yellow text-yellow" />
+                    ))}
+                  </div>
+                  <blockquote className="text-charcoal/80 leading-relaxed mb-6 flex-1">
+                    &ldquo;{t.q}&rdquo;
+                  </blockquote>
+                  <figcaption>
+                    <div className="font-bold text-sm">{t.n}</div>
+                    <div className="text-xs text-charcoal/50 mt-1">{t.r}</div>
+                  </figcaption>
+                </figure>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </div>
       </section>
 
