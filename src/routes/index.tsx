@@ -56,10 +56,10 @@ const ACCENT_RING: Record<string, string> = {
 };
 
 const STATS = [
-  { value: "500+", label: "Happy Clients" },
-  { value: "10+", label: "Years of Experience" },
-  { value: "24/7", label: "Customer Support" },
-  { value: "100%", label: "Satisfaction Guarantee" },
+  { value: "500+", label: "Clients served across the GTA" },
+  { value: "10+", label: "Years cleaning homes & offices" },
+  { value: "24/7", label: "Support, 7 days a week" },
+  { value: "100%", label: "Satisfaction guaranteed" },
 ];
 
 const PARTNERS = [
@@ -156,10 +156,10 @@ function HomePage() {
             <div className="relative -mt-10 md:-mt-14 mb-[-3rem] md:mb-[-4rem] bg-white rounded-3xl shadow-[0_40px_80px_-30px_rgba(0,0,0,0.35)] ring-1 ring-charcoal/5 grid grid-cols-2 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-charcoal/5">
               {STATS.map((s) => (
                 <div key={s.label} className="px-6 py-10 text-center">
-                  <div className="font-heading text-3xl md:text-4xl font-bold leading-[1.15] pb-1 bg-gradient-to-r from-magenta to-orange bg-clip-text text-transparent">
+                  <div className="font-heading text-4xl md:text-5xl font-bold leading-[1.15] pb-1 bg-gradient-to-r from-magenta to-orange bg-clip-text text-transparent">
                     {s.value}
                   </div>
-                  <div className="mt-2 text-[11px] font-bold uppercase tracking-[0.2em] text-charcoal/60">
+                  <div className="mt-3 text-sm md:text-[15px] font-medium text-charcoal/75 leading-snug max-w-[200px] mx-auto">
                     {s.label}
                   </div>
                 </div>
