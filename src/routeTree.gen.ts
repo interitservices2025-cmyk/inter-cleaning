@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as QuoteRouteImport } from './routes/quote'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CompanyRouteImport } from './routes/company'
+import { Route as CareerRouteImport } from './routes/career'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicesIndexRouteImport } from './routes/services.index'
 import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
@@ -29,6 +30,11 @@ const ContactRoute = ContactRouteImport.update({
 const CompanyRoute = CompanyRouteImport.update({
   id: '/company',
   path: '/company',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CareerRoute = CareerRouteImport.update({
+  id: '/career',
+  path: '/career',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -49,6 +55,7 @@ const ServicesSlugRoute = ServicesSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/career': typeof CareerRoute
   '/company': typeof CompanyRoute
   '/contact': typeof ContactRoute
   '/quote': typeof QuoteRoute
@@ -57,6 +64,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/career': typeof CareerRoute
   '/company': typeof CompanyRoute
   '/contact': typeof ContactRoute
   '/quote': typeof QuoteRoute
@@ -66,6 +74,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/career': typeof CareerRoute
   '/company': typeof CompanyRoute
   '/contact': typeof ContactRoute
   '/quote': typeof QuoteRoute
@@ -76,16 +85,25 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/career'
     | '/company'
     | '/contact'
     | '/quote'
     | '/services/$slug'
     | '/services/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/company' | '/contact' | '/quote' | '/services/$slug' | '/services'
+  to:
+    | '/'
+    | '/career'
+    | '/company'
+    | '/contact'
+    | '/quote'
+    | '/services/$slug'
+    | '/services'
   id:
     | '__root__'
     | '/'
+    | '/career'
     | '/company'
     | '/contact'
     | '/quote'
@@ -95,6 +113,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CareerRoute: typeof CareerRoute
   CompanyRoute: typeof CompanyRoute
   ContactRoute: typeof ContactRoute
   QuoteRoute: typeof QuoteRoute
@@ -125,6 +144,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CompanyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/career': {
+      id: '/career'
+      path: '/career'
+      fullPath: '/career'
+      preLoaderRoute: typeof CareerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -151,6 +177,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CareerRoute: CareerRoute,
   CompanyRoute: CompanyRoute,
   ContactRoute: ContactRoute,
   QuoteRoute: QuoteRoute,
