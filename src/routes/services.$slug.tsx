@@ -125,23 +125,26 @@ function ServiceDetail() {
 
       <section className="py-24 bg-zinc-50">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="font-heading text-3xl font-bold mb-12">Other services</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <Reveal>
+            <h2 className="font-heading text-3xl font-bold mb-12">Other services</h2>
+          </Reveal>
+          <Stagger className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {others.map((o) => (
-              <Link
-                key={o.slug}
-                to="/services/$slug"
-                params={{ slug: o.slug }}
-                className="group bg-white p-8 rounded-3xl ring-1 ring-charcoal/5 hover:-translate-y-1 transition-all"
-              >
-                <h3 className="font-heading text-xl font-bold mb-3">{o.name}</h3>
-                <p className="text-sm text-charcoal/60 mb-6">{o.short}</p>
-                <span className="text-magenta font-bold text-sm uppercase tracking-wider flex items-center gap-2">
-                  Learn more <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </span>
-              </Link>
+              <StaggerItem key={o.slug}>
+                <Link
+                  to="/services/$slug"
+                  params={{ slug: o.slug }}
+                  className="group bg-white p-8 rounded-3xl ring-1 ring-charcoal/5 hover:-translate-y-1 transition-all block h-full"
+                >
+                  <h3 className="font-heading text-xl font-bold mb-3">{o.name}</h3>
+                  <p className="text-sm text-charcoal/60 mb-6">{o.short}</p>
+                  <span className="text-magenta font-bold text-sm uppercase tracking-wider flex items-center gap-2">
+                    Learn more <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </span>
+                </Link>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </div>
       </section>
 
