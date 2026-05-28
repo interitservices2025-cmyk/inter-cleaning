@@ -1,12 +1,12 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   Outlet,
-  Link,
   createRootRouteWithContext,
   useRouter,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
+import { Toaster } from "@/components/ui/sonner";
 
 import appCss from "../styles.css?url";
 
@@ -14,18 +14,18 @@ function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
+        <h1 className="text-7xl font-heading font-bold text-gradient-brand">404</h1>
         <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
         <p className="mt-2 text-sm text-muted-foreground">
           The page you're looking for doesn't exist or has been moved.
         </p>
         <div className="mt-6">
-          <Link
-            to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+          <a
+            href="/"
+            className="inline-flex items-center justify-center rounded-full bg-gradient-brand px-6 py-3 text-sm font-bold uppercase tracking-wider text-white"
           >
             Go home
-          </Link>
+          </a>
         </div>
       </div>
     </div>
@@ -51,13 +51,13 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
               router.invalidate();
               reset();
             }}
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            className="inline-flex items-center justify-center rounded-full bg-gradient-brand px-6 py-3 text-sm font-bold uppercase tracking-wider text-white"
           >
             Try again
           </button>
           <a
             href="/"
-            className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
+            className="inline-flex items-center justify-center rounded-full border border-charcoal px-6 py-3 text-sm font-bold uppercase tracking-wider text-charcoal hover:bg-charcoal hover:text-white transition-colors"
           >
             Go home
           </a>
@@ -72,19 +72,51 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Inter-Cleaning Services — Premium Cleaning in the GTA" },
+      {
+        name: "description",
+        content:
+          "Excellence in every sweep. Residential, office and specialty cleaning services across the Greater Toronto Area.",
+      },
+      { name: "author", content: "Inter-Cleaning Services" },
+      { property: "og:site_name", content: "Inter-Cleaning Services" },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "theme-color", content: "#DC0D73" },
     ],
     links: [
+      { rel: "stylesheet", href: appCss },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: appCss,
+        href: "https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Open+Sans:wght@300;400;500;600&display=swap",
+      },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "LocalBusiness",
+          name: "Inter-Cleaning Services",
+          image: "/og.jpg",
+          telephone: "+1-416-871-9045",
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: "Brampton",
+            addressRegion: "ON",
+            postalCode: "L6W 3L3",
+            addressCountry: "CA",
+          },
+          areaServed: "Greater Toronto Area",
+          priceRange: "$$",
+          sameAs: [
+            "https://web.facebook.com/intercleaningservices",
+            "https://www.instagram.com/intercleaningservices01/",
+            "https://www.linkedin.com/company/inter-cleaningservices",
+          ],
+        }),
       },
     ],
   }),
@@ -113,8 +145,8 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
+      <Toaster richColors position="top-right" />
     </QueryClientProvider>
   );
 }
