@@ -79,7 +79,7 @@ function ServiceDetail() {
             <h2 className="font-heading text-3xl font-bold mb-6">What's included</h2>
             <p className="text-charcoal/70 text-lg leading-relaxed mb-8">{s.description}</p>
             <ul className="space-y-4">
-              {s.bullets.map((b) => (
+              {s.bullets.map((b: string) => (
                 <li
                   key={b}
                   className="flex items-start gap-4 p-5 rounded-2xl bg-zinc-50 ring-1 ring-charcoal/5"
