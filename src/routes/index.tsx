@@ -136,29 +136,30 @@ function HomePage() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <Stagger className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {SERVICES.map((s, i) => (
-              <Link
-                key={s.slug}
-                to="/services/$slug"
-                params={{ slug: s.slug }}
-                className={`group bg-white p-8 rounded-3xl ring-1 ring-charcoal/5 flex flex-col h-full hover:-translate-y-1 transition-all ${ACCENT_RING[s.accent]}`}
-              >
-                <div className="flex items-center justify-between mb-6">
-                  <div
-                    className={`w-14 h-14 rounded-2xl flex items-center justify-center ${ACCENT_BG[s.accent]}`}
-                  >
-                    <span className="font-heading font-bold text-lg">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
+              <StaggerItem key={s.slug}>
+                <Link
+                  to="/services/$slug"
+                  params={{ slug: s.slug }}
+                  className={`group bg-white p-8 rounded-3xl ring-1 ring-charcoal/5 flex flex-col h-full hover:-translate-y-1 transition-all ${ACCENT_RING[s.accent]}`}
+                >
+                  <div className="flex items-center justify-between mb-6">
+                    <div
+                      className={`w-14 h-14 rounded-2xl flex items-center justify-center ${ACCENT_BG[s.accent]}`}
+                    >
+                      <span className="font-heading font-bold text-lg">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                    </div>
+                    <ArrowRight className="w-5 h-5 text-charcoal/30 group-hover:text-magenta group-hover:translate-x-1 transition-all" />
                   </div>
-                  <ArrowRight className="w-5 h-5 text-charcoal/30 group-hover:text-magenta group-hover:translate-x-1 transition-all" />
-                </div>
-                <h3 className="font-heading text-xl font-bold mb-3 leading-tight">{s.name}</h3>
-                <p className="text-sm text-charcoal/60 leading-relaxed">{s.short}</p>
-              </Link>
+                  <h3 className="font-heading text-xl font-bold mb-3 leading-tight">{s.name}</h3>
+                  <p className="text-sm text-charcoal/60 leading-relaxed">{s.short}</p>
+                </Link>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </div>
       </section>
 
