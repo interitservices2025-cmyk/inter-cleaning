@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Sparkles, ShieldCheck, Heart, Award } from "lucide-react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
 import teamImg from "@/assets/team.jpg";
 
 export const Route = createFileRoute("/company")({
@@ -31,12 +32,16 @@ function AboutPage() {
       <section className="relative bg-charcoal overflow-hidden diagonal-clip">
         <div className="absolute inset-0 bg-gradient-to-br from-magenta to-orange opacity-95" />
         <div className="relative z-10 max-w-7xl mx-auto px-6 py-24 md:py-32">
-          <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-yellow mb-6 block">
-            About Us
-          </span>
-          <h1 className="font-heading text-5xl md:text-7xl text-white font-bold tracking-tight max-w-3xl leading-tight">
-            Modernizing professional cleaning in the GTA.
-          </h1>
+          <Reveal>
+            <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-yellow mb-6 block">
+              Company
+            </span>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <h1 className="font-heading text-5xl md:text-7xl text-white font-bold tracking-tight max-w-3xl leading-tight">
+              Modernizing professional cleaning in the GTA.
+            </h1>
+          </Reveal>
         </div>
       </section>
 
