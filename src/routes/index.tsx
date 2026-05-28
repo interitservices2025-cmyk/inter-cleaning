@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Check, Sparkles, Clock, ShieldCheck, Star } from "lucide-react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
 import { SERVICES, SITE } from "@/lib/site";
 import heroImg from "@/assets/hero.jpg";
 
@@ -57,19 +58,25 @@ function HomePage() {
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 py-28 md:py-44">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/15 backdrop-blur text-white/90 text-[11px] font-semibold uppercase tracking-[0.25em] mb-8">
-              <Sparkles className="w-3.5 h-3.5 text-yellow" />
-              Serving the Greater Toronto Area
-            </div>
-            <h1 className="font-heading text-5xl md:text-7xl lg:text-8xl text-white font-bold leading-[0.95] tracking-tight mb-8">
-              Excellence in <span className="text-yellow italic font-semibold">Every</span>
-              <br />
-              Sweep.
-            </h1>
-            <p className="text-white/90 text-lg md:text-xl max-w-xl mb-12 leading-relaxed">
-              Premium cleaning services across the GTA. We bring precision, energy and a
-              sparkling finish to every space we touch.
-            </p>
+            <Reveal>
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/15 backdrop-blur text-white/90 text-[11px] font-semibold uppercase tracking-[0.25em] mb-8">
+                <Sparkles className="w-3.5 h-3.5 text-yellow" />
+                Serving the Greater Toronto Area
+              </div>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <h1 className="font-heading text-5xl md:text-7xl lg:text-8xl text-white font-bold leading-[0.95] tracking-tight mb-8">
+                Excellence in <span className="text-yellow italic font-semibold">Every</span>
+                <br />
+                Sweep.
+              </h1>
+            </Reveal>
+            <Reveal delay={0.2}>
+              <p className="text-white/90 text-lg md:text-xl max-w-xl mb-12 leading-relaxed">
+                Premium cleaning services across the GTA. We bring precision, energy and a
+                sparkling finish to every space we touch.
+              </p>
+            </Reveal>
             <div className="flex flex-wrap gap-4">
               <Link
                 to="/quote"
