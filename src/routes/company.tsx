@@ -47,77 +47,82 @@ function AboutPage() {
 
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
-          <div className="relative aspect-[4/5] rounded-[32px] overflow-hidden">
-            <img
-              src={teamImg}
-              alt="The Inter-Cleaning Services team"
-              width={1400}
-              height={1000}
-              loading="lazy"
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div>
-            <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-magenta block mb-4">
-              Our Story
-            </span>
-            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6 tracking-tight">
-              A fresh take on a familiar trade.
-            </h2>
-            <div className="space-y-4 text-charcoal/70 text-lg leading-relaxed">
-              <p>
-                Inter-Cleaning Services was built on a simple idea: cleaning should feel premium —
-                from the moment you request a quote to the second you walk into a perfectly
-                refreshed space.
-              </p>
-              <p>
-                We serve the Greater Toronto Area with vetted, trained professionals, modern
-                equipment, and a quality-control standard that consistently exceeds expectations.
-                Whether it's a downtown condo, a Brampton family home or a Mississauga office,
-                we bring the same level of care to every job.
-              </p>
-              <p>
-                Our vibrant brand is a deliberate choice. In a market full of forgettable
-                cleaners, we stand for energy, passion and unwavering excellence.
-              </p>
+          <Reveal y={32}>
+            <div className="relative aspect-[4/5] rounded-[32px] overflow-hidden">
+              <img
+                src={teamImg}
+                alt="The Inter-Cleaning Services team"
+                width={1400}
+                height={1000}
+                loading="lazy"
+                className="w-full h-full object-cover"
+              />
             </div>
-          </div>
+          </Reveal>
+          <Reveal delay={0.1} y={32}>
+            <div>
+              <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-magenta block mb-4">
+                Our Story
+              </span>
+              <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6 tracking-tight">
+                A fresh take on a familiar trade.
+              </h2>
+              <div className="space-y-4 text-charcoal/70 text-lg leading-relaxed">
+                <p>
+                  Inter-Cleaning Services was built on a simple idea: cleaning should feel premium —
+                  from the moment you request a quote to the second you walk into a perfectly
+                  refreshed space.
+                </p>
+                <p>
+                  We serve the Greater Toronto Area with vetted, trained professionals, modern
+                  equipment, and a quality-control standard that consistently exceeds expectations.
+                  Whether it's a downtown condo, a Brampton family home or a Mississauga office,
+                  we bring the same level of care to every job.
+                </p>
+                <p>
+                  Our vibrant brand is a deliberate choice. In a market full of forgettable
+                  cleaners, we stand for energy, passion and unwavering excellence.
+                </p>
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 
       <section className="py-24 bg-zinc-50">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
+          <Reveal className="text-center mb-16">
             <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-magenta block mb-4">
               Our Values
             </span>
             <h2 className="font-heading text-4xl md:text-5xl font-bold tracking-tight">
               What we promise, every visit.
             </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          </Reveal>
+          <Stagger className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               { Icon: ShieldCheck, t: "Reliability", d: "Punctual, vetted, insured." },
               { Icon: Sparkles, t: "Excellence", d: "Sparkling results, every time." },
               { Icon: Heart, t: "Care", d: "Your space, treated like ours." },
               { Icon: Award, t: "Professionalism", d: "Uniformed, trained, accountable." },
             ].map(({ Icon, t, d }) => (
-              <div key={t} className="bg-white p-8 rounded-3xl ring-1 ring-charcoal/5">
+              <StaggerItem key={t} className="bg-white p-8 rounded-3xl ring-1 ring-charcoal/5 hover:-translate-y-1 transition-transform">
                 <div className="w-12 h-12 rounded-2xl bg-magenta/10 grid place-items-center mb-6">
                   <Icon className="w-6 h-6 text-magenta" />
                 </div>
                 <h3 className="font-heading text-xl font-bold mb-2">{t}</h3>
                 <p className="text-charcoal/60 text-sm leading-relaxed">{d}</p>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </div>
       </section>
 
       <section className="py-28">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="font-heading text-4xl md:text-5xl font-bold mb-8 tracking-tight">
-            Let's make your space <span className="text-gradient-brand">sparkle.</span>
+          <Reveal>
+            <h2 className="font-heading text-4xl md:text-5xl font-bold mb-8 tracking-tight">
+              Let's make your space <span className="text-gradient-brand">sparkle.</span>
           </h2>
           <Link
             to="/quote"
