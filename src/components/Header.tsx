@@ -4,13 +4,13 @@ import { Menu, X } from "lucide-react";
 import { motion } from "motion/react";
 import { Logo } from "./Logo";
 
-const NAV = [
+const NAV: { to: "/" | "/services" | "/company" | "/career" | "/contact"; label: string; exact?: boolean }[] = [
   { to: "/", label: "Home", exact: true },
   { to: "/services", label: "Services" },
   { to: "/company", label: "Company" },
   { to: "/career", label: "Career" },
   { to: "/contact", label: "Contact" },
-] as const;
+];
 
 export function Header() {
   const [open, setOpen] = useState(false);

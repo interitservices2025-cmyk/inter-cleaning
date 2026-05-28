@@ -4,7 +4,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import teamImg from "@/assets/team.jpg";
 
-export const Route = createFileRoute("/about")({
+export const Route = createFileRoute("/company")({
   head: () => ({
     meta: [
       { title: "About Inter-Cleaning Services — Premium Cleaning in the GTA" },
@@ -16,9 +16,9 @@ export const Route = createFileRoute("/about")({
       { property: "og:title", content: "About — Inter-Cleaning Services" },
       { property: "og:description", content: "Our story, values and team." },
       { property: "og:image", content: teamImg },
-      { property: "og:url", content: "/about" },
+      { property: "og:url", content: "/company" },
     ],
-    links: [{ rel: "canonical", href: "/about" }],
+    links: [{ rel: "canonical", href: "/company" }],
   }),
   component: AboutPage,
 });
