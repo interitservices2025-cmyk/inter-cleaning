@@ -78,9 +78,9 @@ export function Footer() {
             </ul>
             <Link
               to="/quote"
-              className="inline-flex mt-8 bg-gradient-brand text-white px-6 py-3 rounded-full text-xs font-bold uppercase tracking-wider hover:-translate-y-0.5 transition-transform"
+              className="inline-flex mt-8 bg-gradient-brand text-white px-6 py-3 rounded-full text-[11px] font-bold tracking-wide hover:-translate-y-0.5 transition-transform"
             >
-              Request a Free Quote
+              Get a quote in under 24 hours!
             </Link>
           </div>
         </div>

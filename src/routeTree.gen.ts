@@ -92,7 +92,14 @@ export interface FileRouteTypes {
     | '/services/$slug'
     | '/services/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/career' | '/company' | '/contact' | '/quote' | '/services/$slug' | '/services'
+  to:
+    | '/'
+    | '/career'
+    | '/company'
+    | '/contact'
+    | '/quote'
+    | '/services/$slug'
+    | '/services'
   id:
     | '__root__'
     | '/'

@@ -101,9 +101,9 @@ function ServiceDetail() {
               </p>
               <Link
                 to="/quote"
-                className="block w-full text-center bg-gradient-brand text-white py-3 px-6 rounded-full text-sm font-bold uppercase tracking-wider mb-3"
+                className="block w-full text-center bg-gradient-brand text-white py-3 px-6 rounded-full text-[12px] font-bold tracking-wide mb-3"
               >
-                Free Quote
+                Get a quote in under 24 hours!
               </Link>
               <a
                 href={SITE.phoneHref}

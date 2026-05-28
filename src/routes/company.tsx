@@ -116,9 +116,9 @@ function AboutPage() {
           </h2>
           <Link
             to="/quote"
-            className="inline-flex bg-gradient-brand text-white px-10 py-4 rounded-full text-sm font-bold uppercase tracking-wider hover:-translate-y-0.5 transition-transform"
+            className="inline-flex bg-gradient-brand text-white px-10 py-4 rounded-full text-sm font-bold tracking-wide hover:-translate-y-0.5 transition-transform"
           >
-            Get a Free Quote
+            Get a quote in under 24 hours!
           </Link>
         </div>
       </section>

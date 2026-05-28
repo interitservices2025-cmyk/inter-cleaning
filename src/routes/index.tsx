@@ -73,9 +73,9 @@ function HomePage() {
             <div className="flex flex-wrap gap-4">
               <Link
                 to="/quote"
-                className="group bg-white text-magenta py-4 pr-5 pl-6 flex items-center gap-2 rounded-full text-sm font-bold uppercase tracking-wider hover:bg-yellow hover:text-charcoal transition-all"
+                className="group bg-white text-magenta py-4 pr-5 pl-6 flex items-center gap-2 rounded-full text-sm font-bold tracking-wide hover:bg-yellow hover:text-charcoal transition-all"
               >
-                Get Your Free Quote
+                Get a quote in under 24 hours!
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </Link>
               <Link
@@ -293,9 +293,9 @@ function HomePage() {
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Link
                   to="/quote"
-                  className="bg-white text-magenta py-4 px-10 rounded-full font-bold uppercase tracking-wider text-sm hover:bg-charcoal hover:text-white transition-colors"
+                  className="bg-white text-magenta py-4 px-10 rounded-full font-bold tracking-wide text-sm hover:bg-charcoal hover:text-white transition-colors"
                 >
-                  Get Your Free Quote
+                  Get a quote in under 24 hours!
                 </Link>
                 <a
                   href={SITE.phoneHref}
