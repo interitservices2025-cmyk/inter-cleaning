@@ -123,13 +123,14 @@ function AboutPage() {
           <Reveal>
             <h2 className="font-heading text-4xl md:text-5xl font-bold mb-8 tracking-tight">
               Let's make your space <span className="text-gradient-brand">sparkle.</span>
-          </h2>
-          <Link
-            to="/quote"
-            className="inline-flex bg-gradient-brand text-white px-10 py-4 rounded-full text-sm font-bold tracking-wide hover:-translate-y-0.5 transition-transform"
-          >
-            Get a quote in under 24 hours!
-          </Link>
+            </h2>
+            <Link
+              to="/quote"
+              className="inline-flex bg-gradient-brand text-white px-10 py-4 rounded-full text-sm font-bold tracking-wide hover:-translate-y-0.5 transition-transform"
+            >
+              Get a quote in under 24 hours!
+            </Link>
+          </Reveal>
         </div>
       </section>
 
