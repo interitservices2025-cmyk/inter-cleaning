@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { Reveal } from "@/components/Reveal";
 import { SERVICES } from "@/lib/site";
 
 export const Route = createFileRoute("/services/")({
@@ -31,12 +32,16 @@ function ServicesIndex() {
         <div className="absolute inset-0 bg-gradient-to-br from-magenta to-orange opacity-95" />
         <div className="absolute top-0 right-0 w-1/3 h-full bg-white/5 -skew-x-12 translate-x-20" />
         <div className="relative z-10 max-w-7xl mx-auto px-6 py-24 md:py-32">
-          <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-yellow mb-6 block">
-            Our Services
-          </span>
-          <h1 className="font-heading text-5xl md:text-7xl text-white font-bold tracking-tight leading-tight max-w-3xl">
-            Specialty cleaning, tailored to your space.
-          </h1>
+          <Reveal>
+            <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-yellow mb-6 block">
+              Our Services
+            </span>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <h1 className="font-heading text-5xl md:text-7xl text-white font-bold tracking-tight leading-tight max-w-3xl">
+              Specialty cleaning, tailored to your space.
+            </h1>
+          </Reveal>
         </div>
       </section>
 
