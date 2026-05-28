@@ -2,6 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowRight, Check, Phone } from "lucide-react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
 import { getService, SERVICES, SITE } from "@/lib/site";
 
 export const Route = createFileRoute("/services/$slug")({
@@ -60,16 +61,22 @@ function ServiceDetail() {
         />
         <div className="absolute inset-0 bg-gradient-to-br from-magenta/95 to-orange/85 mix-blend-multiply" />
         <div className="relative z-10 max-w-7xl mx-auto px-6 py-24 md:py-32">
-          <Link
-            to="/services"
-            className="text-yellow text-[11px] font-bold uppercase tracking-[0.3em] hover:underline"
-          >
-            ← All services
-          </Link>
-          <h1 className="font-heading text-4xl md:text-6xl text-white font-bold tracking-tight mt-6 max-w-3xl">
-            {s.name}
-          </h1>
-          <p className="text-white/90 text-lg md:text-xl mt-6 max-w-2xl">{s.short}</p>
+          <Reveal>
+            <Link
+              to="/services"
+              className="text-yellow text-[11px] font-bold uppercase tracking-[0.3em] hover:underline"
+            >
+              ← All services
+            </Link>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <h1 className="font-heading text-4xl md:text-6xl text-white font-bold tracking-tight mt-6 max-w-3xl">
+              {s.name}
+            </h1>
+          </Reveal>
+          <Reveal delay={0.2}>
+            <p className="text-white/90 text-lg md:text-xl mt-6 max-w-2xl">{s.short}</p>
+          </Reveal>
         </div>
       </section>
 
