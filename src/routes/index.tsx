@@ -56,10 +56,10 @@ const ACCENT_RING: Record<string, string> = {
 };
 
 const STATS = [
-  { value: "500+", label: "Happy Clients" },
-  { value: "10+", label: "Years of Experience" },
-  { value: "24/7", label: "Customer Support" },
-  { value: "100%", label: "Satisfaction Guarantee" },
+  { value: "500+", label: "Clients served across the GTA" },
+  { value: "10+", label: "Years cleaning homes & offices" },
+  { value: "24/7", label: "Support, 7 days a week" },
+  { value: "100%", label: "Satisfaction guaranteed" },
 ];
 
 const PARTNERS = [
