@@ -56,10 +56,10 @@ const ACCENT_RING: Record<string, string> = {
 };
 
 const STATS = [
-  { value: "500+", label: "Clients served across the GTA" },
-  { value: "10+", label: "Years cleaning homes & offices" },
-  { value: "24/7", label: "Support, 7 days a week" },
-  { value: "100%", label: "Satisfaction guaranteed" },
+  { Icon: Users, value: "500+", label: "Clients served across the GTA" },
+  { Icon: Award, value: "10+", label: "Years cleaning homes & offices" },
+  { Icon: Clock, value: "24/7", label: "Support, 7 days a week" },
+  { Icon: ShieldCheck, value: "100%", label: "Satisfaction guaranteed" },
 ];
 
 const PARTNERS = [
@@ -150,17 +150,28 @@ function HomePage() {
           </div>
         </div>
 
-        {/* Floating stats card */}
-        <div className="relative z-10 max-w-7xl mx-auto px-6">
+      </section>
+
+      {/* STATS BAND */}
+      <section className="bg-white border-b border-charcoal/5">
+        <div className="max-w-7xl mx-auto px-6 py-14 md:py-20">
           <Reveal>
-            <div className="relative -mt-10 md:-mt-14 mb-[-3rem] md:mb-[-4rem] bg-white rounded-3xl shadow-[0_40px_80px_-30px_rgba(0,0,0,0.35)] ring-1 ring-charcoal/5 grid grid-cols-2 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-charcoal/5">
-              {STATS.map((s) => (
-                <div key={s.label} className="px-6 py-10 text-center">
-                  <div className="font-heading text-4xl md:text-5xl font-bold leading-[1.15] pb-1 bg-gradient-to-r from-magenta to-orange bg-clip-text text-transparent">
-                    {s.value}
-                  </div>
-                  <div className="mt-3 text-sm md:text-[15px] font-medium text-charcoal/75 leading-snug max-w-[200px] mx-auto">
-                    {s.label}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-6">
+              {STATS.map(({ Icon, value, label }) => (
+                <div
+                  key={label}
+                  className="flex items-center gap-5 p-6 rounded-2xl bg-gradient-to-br from-zinc-50 to-white ring-1 ring-charcoal/5 hover:ring-magenta/30 hover:-translate-y-0.5 transition-all"
+                >
+                  <span className="shrink-0 w-14 h-14 rounded-xl bg-gradient-brand grid place-items-center text-white shadow-[0_10px_25px_-10px_color-mix(in_oklab,var(--magenta)_70%,transparent)]">
+                    <Icon className="w-6 h-6" />
+                  </span>
+                  <div className="min-w-0">
+                    <div className="font-heading text-3xl md:text-4xl font-bold leading-none bg-gradient-to-r from-magenta to-orange bg-clip-text text-transparent">
+                      {value}
+                    </div>
+                    <div className="mt-2 text-sm font-medium text-charcoal/70 leading-snug">
+                      {label}
+                    </div>
                   </div>
                 </div>
               ))}
@@ -170,7 +181,7 @@ function HomePage() {
       </section>
 
       {/* PARTNERS */}
-      <section className="pt-28 md:pt-36 pb-12 bg-white">
+      <section className="pt-16 md:pt-20 pb-12 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <p className="text-center text-[11px] font-bold uppercase tracking-[0.3em] text-charcoal/40 mb-8">
             Trusted by property managers, clinics & offices across the GTA

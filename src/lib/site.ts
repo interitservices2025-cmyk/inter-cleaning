@@ -10,7 +10,7 @@ export const SITE = {
   tagline: "Excellence in Every Sweep",
   phone: "+1 (416) 871-9045",
   phoneHref: "tel:+14168719045",
-  email: "hello@inter-cleaningservices.com",
+  email: "contact@inter-cleaningservices.com",
   address: "Brampton, Ontario, L6W 3L3, Canada",
   city: "Brampton",
   region: "Greater Toronto Area",
