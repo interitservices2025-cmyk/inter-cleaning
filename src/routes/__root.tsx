@@ -83,6 +83,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "theme-color", content: "#DC0D73" },
+      { property: "og:title", content: "Inter-Cleaning Services — Premium Cleaning in the GTA" },
+      { name: "twitter:title", content: "Inter-Cleaning Services — Premium Cleaning in the GTA" },
+      { name: "description", content: "A professional website redesign for a cleaning service, featuring a modern look and updated service offerings." },
+      { property: "og:description", content: "A professional website redesign for a cleaning service, featuring a modern look and updated service offerings." },
+      { name: "twitter:description", content: "A professional website redesign for a cleaning service, featuring a modern look and updated service offerings." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/757fc73f-be71-4fba-a977-4e4cade3579e/id-preview-83635bbd--f5c0edc1-6e42-4d05-8ead-c66f83376de5.lovable.app-1780001278518.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/757fc73f-be71-4fba-a977-4e4cade3579e/id-preview-83635bbd--f5c0edc1-6e42-4d05-8ead-c66f83376de5.lovable.app-1780001278518.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
