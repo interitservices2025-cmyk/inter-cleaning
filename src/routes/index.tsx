@@ -153,13 +153,13 @@ function HomePage() {
         {/* Floating stats card */}
         <div className="relative z-10 max-w-7xl mx-auto px-6">
           <Reveal>
-            <div className="relative -mt-12 md:-mt-16 mb-[-3rem] md:mb-[-4rem] bg-white rounded-3xl shadow-[0_40px_80px_-30px_rgba(0,0,0,0.35)] ring-1 ring-charcoal/5 grid grid-cols-2 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-charcoal/5 overflow-hidden">
+            <div className="relative -mt-10 md:-mt-14 mb-[-3rem] md:mb-[-4rem] bg-white rounded-3xl shadow-[0_40px_80px_-30px_rgba(0,0,0,0.35)] ring-1 ring-charcoal/5 grid grid-cols-2 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-charcoal/5">
               {STATS.map((s) => (
-                <div key={s.label} className="px-6 py-8 text-center">
-                  <div className="font-heading text-3xl md:text-4xl font-bold text-gradient-brand bg-gradient-to-r from-magenta to-orange bg-clip-text text-transparent">
+                <div key={s.label} className="px-6 py-10 text-center">
+                  <div className="font-heading text-3xl md:text-4xl font-bold leading-[1.15] pb-1 bg-gradient-to-r from-magenta to-orange bg-clip-text text-transparent">
                     {s.value}
                   </div>
-                  <div className="mt-1 text-[11px] font-bold uppercase tracking-[0.2em] text-charcoal/60">
+                  <div className="mt-2 text-[11px] font-bold uppercase tracking-[0.2em] text-charcoal/60">
                     {s.label}
                   </div>
                 </div>
