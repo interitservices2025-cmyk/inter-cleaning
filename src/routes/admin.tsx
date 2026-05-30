@@ -30,12 +30,12 @@ export const Route = createFileRoute("/admin")({
   component: AdminLayout,
 });
 
-const NAV = [
+const NAV: { to: "/admin" | "/admin/blogs" | "/admin/pages" | "/admin/services"; label: string; Icon: typeof Sparkles; exact?: boolean }[] = [
   { to: "/admin", label: "Dashboard", Icon: Sparkles, exact: true },
   { to: "/admin/blogs", label: "Blog posts", Icon: FileText },
   { to: "/admin/pages", label: "Pages", Icon: Layout },
   { to: "/admin/services", label: "Services", Icon: ShieldCheck },
-] as const;
+];
 
 function AdminLayout() {
   const navigate = useNavigate();
