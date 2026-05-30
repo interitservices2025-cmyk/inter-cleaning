@@ -1,26 +1,40 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import {
   ArrowRight,
   Check,
   Sparkles,
   Clock,
   ShieldCheck,
-  Star,
   Users,
   Award,
   HeartHandshake,
   Phone,
+  Building2,
+  Home,
+  Hotel,
+  Stethoscope,
+  Briefcase,
+  Truck,
 } from "lucide-react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
-import { BeforeAfter } from "@/components/BeforeAfter";
+import { BeforeAfterGallery } from "@/components/BeforeAfterGallery";
+import { GoogleReviewCard } from "@/components/GoogleReviewCard";
+import { PartnerLogo } from "@/components/PartnerLogo";
 import { SERVICES, SITE } from "@/lib/site";
+import { latestPublishedPosts } from "@/lib/blog.functions";
 import heroImg from "@/assets/hero.jpg";
-import beforeAfter from "@/assets/before-after-living.jpg";
-import avatar1 from "@/assets/avatar-1.jpg";
-import avatar2 from "@/assets/avatar-2.jpg";
-import avatar3 from "@/assets/avatar-3.jpg";
+import baLiving from "@/assets/ba-living.jpg";
+import baKitchen from "@/assets/ba-kitchen.jpg";
+import baBathroom from "@/assets/ba-bathroom.jpg";
+import baOffice from "@/assets/ba-office.jpg";
+
+const latestPostsQO = queryOptions({
+  queryKey: ["blog", "latest"],
+  queryFn: () => latestPublishedPosts(),
+});
 
 export const Route = createFileRoute("/")({
   head: () => ({
