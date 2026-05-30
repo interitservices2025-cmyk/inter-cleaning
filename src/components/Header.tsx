@@ -5,11 +5,12 @@ import { motion, AnimatePresence } from "motion/react";
 import { Logo } from "./Logo";
 import { SITE } from "@/lib/site";
 
-const NAV: { to: "/" | "/services" | "/company" | "/career" | "/contact"; label: string; exact?: boolean }[] = [
+const NAV: { to: "/" | "/services" | "/company" | "/career" | "/blog" | "/contact"; label: string; exact?: boolean }[] = [
   { to: "/", label: "Home", exact: true },
   { to: "/services", label: "Services" },
   { to: "/company", label: "Company" },
   { to: "/career", label: "Career" },
+  { to: "/blog", label: "Blog" },
   { to: "/contact", label: "Contact" },
 ];
 

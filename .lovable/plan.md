@@ -1,73 +1,47 @@
+## Objectif
+Mini back-office complet + 4 améliorations homepage, sur Lovable Cloud (Supabase managé).
 
-# Refonte Inter-Cleaning Services — site premium GTA
+## 1. Backend (Lovable Cloud)
+- Activation Cloud (Supabase + Auth).
+- Tables : `blog_posts`, `pages`, `services`, `user_roles` (enum `admin`).
+- RLS : lecture publique sur `published=true`, écriture réservée aux admins via `has_role()`.
+- Storage bucket public `cms-media` pour images (cover blog, hero pages).
+- Premier admin promu via SQL (je te demanderai ton email après signup).
 
-Objectif: cloner la structure du site actuel (https://inter-cleaningservices.com) mais le repositionner en site **premium, vibrant et moderne** qui matche la nouvelle identité de marque (magenta/orange/yellow + logo dynamique) — très loin du template WordPress actuel.
+## 2. Admin `/admin` (protégé)
+- `/admin/login` — email + password.
+- Layout admin avec sidebar : Blogs · Pages · Services · Déconnexion.
+- **Blogs** : liste, créer, éditer (titre, slug, extrait, contenu markdown, image cover, statut publié), supprimer.
+- **Pages** : éditer Home/Company/Career/Contact (blocs textes + images clés) + créer pages custom (slug, titre, contenu, SEO).
+- **Services** : CRUD sur les 6 services (migration depuis `site.ts` vers DB).
+- Éditeur de contenu : textarea markdown + upload image dans Storage.
 
-Langue du site: **anglais** (marché GTA, comme l'original et le brand book).
+## 3. Blog public
+- `/blog` — grille des articles publiés (image, titre, date, extrait).
+- `/blog/$slug` — article complet, rendu markdown, image cover, SEO meta.
+- Lien "Blog" ajouté au menu Header + Footer.
 
-## Charte appliquée (verrouillée)
+## 4. Homepage — 4 changements
+- **3 derniers blogs** : nouvelle section "Latest from the blog" qui pull les 3 derniers `published=true` (auto-update à chaque nouvel article).
+- **Before/After** : remplace l'image unique par un carrousel de 4 paires générées (salon, cuisine, salle de bain, bureau) avec boutons précédent/suivant + indicateurs.
+- **Trusted by** : section logos clients avec 6 entreprises fictives (TechCorp, Maple Realty, Northwind Clinics, Lakeside Hotels, Cedar Offices, Atlas Logistics) — logos texte stylisés.
+- **Reviews Google** : remplace les 5 étoiles par 3 cartes avis Google statiques (avatar, nom, note 5★, texte, date, logo "Google" en coin).
 
-- Couleurs: Magenta `#DC0D73`, Orange `#FDAE00`, Yellow `#FEB400`, fonds blanc cassé + charcoal `#1A1A1A`
-- Typo: **Montserrat** (titres, geometric sans), **Open Sans** (corps)
-- Logo: `logo_dynamic_original_colors.png` (header, footer, hero, favicon)
-- Ton: "Excellence in Every Sweep" — fiabilité, efficacité, excellence
-
-## Architecture des routes
-
-Site multi-pages (pas de scroll unique), chaque page avec son propre SEO:
-
-- `/` — Home (hero, services preview, why us, process, testimonials, CTA quote)
-- `/services` — index des 6 services avec cards
-- `/services/residential` — détail Residential Cleaning
-- `/services/office` — Office & Small Business
-- `/services/deep-cleaning` — Deep Cleaning
-- `/services/move-in-out` — Move-In / Move-Out
-- `/services/carpet-upholstery` — Carpet & Upholstery
-- `/services/window-glass` — Window & Glass (Interior)
-- `/about` — histoire, valeurs (Reliability / Efficiency / Excellence), équipe
-- `/contact` — formulaire + infos (Brampton, +1 416-871-9045, socials)
-- `/quote` — formulaire devis multi-étapes
-
-Nav header sticky avec logo + menu + bouton "Get a Free Quote" en gradient magenta→orange.
-
-## Contenu clé
-
-**Services affichés** (exactement ceux du .docx, les "ne pas afficher" sont exclus):
-1. Residential Cleaning
-2. Office & Small Business Cleaning
-3. Deep Cleaning
-4. Move-In / Move-Out Cleaning
-5. Carpet & Upholstery Cleaning
-6. Window & Glass Cleaning (Interior)
-
-**Infos société** reprises du site actuel: tél +1 (416) 871-9045, Brampton ON L6W 3L3, Facebook / Instagram / LinkedIn.
-
-## Design — direction "wahou"
-
-Avant d'implémenter, je génère **3 directions visuelles rendues** (HTML+Tailwind) verrouillées sur palette magenta/orange/yellow + Montserrat/Open Sans, qui varient sur composition, densité et énergie:
-- une **éditoriale magazine** (grand hero typographique, grille asymétrique, beaucoup de blanc)
-- une **bold/sportive** (gradient plein écran, formes diagonales, gros chiffres, énergie maximale)
-- une **premium minimaliste** (sobre, photos pleine largeur, accents couleur ponctuels, feel haut de gamme résidentiel)
-
-Tu choisis → je build la direction retenue exactement (composition, tokens, typo).
+## 5. Pages dynamiques
+Company/Career/Contact lisent leur contenu depuis la table `pages` (fallback texte par défaut si vide) → éditables depuis l'admin sans redéploiement.
 
 ## Détails techniques
+- Server functions TanStack (`createServerFn`) pour toutes lectures/écritures admin avec `requireSupabaseAuth`.
+- Lectures publiques (blog list, home) via fonctions admin élevées scopées (`published=true`).
+- Upload images : signed upload côté admin, URL publique stockée en DB.
+- Markdown rendu via `react-markdown` (à installer).
+- ~4 images IA pour before/after (8 visuels = 4 paires). Logos clients = composants SVG/texte (pas d'IA).
 
-- TanStack Start (déjà en place), routes file-based dans `src/routes/`
-- Tokens CSS dans `src/styles.css` (oklch) — magenta/orange/yellow + gradients + shadows premium
-- Montserrat + Open Sans via Google Fonts dans `__root.tsx`
-- Logo copié dans `src/assets/logo.png` + favicon
-- Images services: générées via imagegen (photos cleaning premium, scènes GTA), stockées dans `src/assets/`
-- Animations: Motion for React (fade/slide subtils au scroll, hover sur cards)
-- Formulaire devis: state local pour l'instant (pas de backend) — affiche un toast de confirmation. On branchera Lovable Cloud + email plus tard si tu veux recevoir les leads réellement.
-- SEO: `head()` par route avec title/description/og uniques, JSON-LD `LocalBusiness` sur `/`
-- Responsive mobile-first, accessibilité AA
+## Hors scope V1 (à confirmer si tu veux les ajouter)
+- Catégories/tags blog
+- Commentaires
+- Recherche
+- Multi-langue
+- Rich text WYSIWYG (on reste sur markdown pour la V1)
 
-## Hors scope (à demander explicitement si besoin)
-
-- Backend devis (envoi email / stockage) → nécessite Lovable Cloud
-- Multilingue FR/EN
-- Blog / système de réservation en ligne avec créneaux
-- Paiement en ligne
-
-Une fois le plan approuvé, je commence par générer les 3 directions design pour que tu choisisses avant le build complet.
+Confirme et je lance tout d'un coup.
