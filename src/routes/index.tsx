@@ -54,7 +54,11 @@ export const Route = createFileRoute("/")({
     ],
     links: [{ rel: "canonical", href: "/" }],
   }),
+  loader: ({ context }) => context.queryClient.ensureQueryData(latestPostsQO),
   component: HomePage,
+  errorComponent: ({ error }) => (
+    <div className="p-12 text-center text-charcoal/70">Couldn't load: {error.message}</div>
+  ),
 });
 
 const ACCENT_BG: Record<string, string> = {
@@ -77,15 +81,47 @@ const STATS = [
 ];
 
 const PARTNERS = [
-  "GTA Property Group",
-  "Northstar Realty",
-  "Bayview Clinics",
-  "Maple Hospitality",
-  "Lakeshore Offices",
-  "Heritage Estates",
+  { name: "TechCorp", tag: "Tech offices", Icon: Briefcase },
+  { name: "Maple Realty", tag: "Property mgmt", Icon: Home },
+  { name: "Northwind Clinics", tag: "Healthcare", Icon: Stethoscope },
+  { name: "Lakeside Hotels", tag: "Hospitality", Icon: Hotel },
+  { name: "Cedar Offices", tag: "Corporate", Icon: Building2 },
+  { name: "Atlas Logistics", tag: "Warehousing", Icon: Truck },
+];
+
+const BA_PAIRS = [
+  { image: baLiving, label: "Living room reset — Toronto", alt: "Living room before and after cleaning" },
+  { image: baKitchen, label: "Kitchen deep clean — Mississauga", alt: "Kitchen before and after cleaning" },
+  { image: baBathroom, label: "Bathroom restoration — Brampton", alt: "Bathroom before and after cleaning" },
+  { image: baOffice, label: "Office turnaround — Vaughan", alt: "Office before and after cleaning" },
+];
+
+const GOOGLE_REVIEWS = [
+  {
+    name: "Sarah M.",
+    meta: "Local Guide · 14 reviews",
+    initials: "SM",
+    daysAgo: "2 weeks ago",
+    text: "The team is punctual, thorough and genuinely cares about the details. Our condo has never looked better — highly recommend Inter-Cleaning.",
+  },
+  {
+    name: "Marc D.",
+    meta: "Office Manager · 3 reviews",
+    initials: "MD",
+    daysAgo: "1 month ago",
+    text: "We switched our office cleaning to Inter-Cleaning six months ago and the difference is night and day. Reliable, professional and consistently spotless.",
+  },
+  {
+    name: "Priya K.",
+    meta: "8 reviews",
+    initials: "PK",
+    daysAgo: "3 weeks ago",
+    text: "Move-out cleaning that actually passed inspection on the first try. Got my full deposit back. Worth every dollar.",
+  },
 ];
 
 function HomePage() {
+  const { data: latestPosts } = useSuspenseQuery(latestPostsQO);
   return (
     <div className="bg-white text-charcoal min-h-screen">
       <Header />
@@ -152,7 +188,7 @@ function HomePage() {
                   { Icon: ShieldCheck, t: "Satisfaction guaranteed" },
                   { Icon: Award, t: "Vetted & trained staff" },
                   { Icon: Clock, t: "Available 7 days/week" },
-                  { Icon: Star, t: "5-star rated service" },
+                  { Icon: Sparkles, t: "5-star Google reviews" },
                 ].map(({ Icon, t }) => (
                   <li key={t} className="flex items-center gap-2">
                     <Icon className="w-4 h-4 text-yellow" />
@@ -200,16 +236,13 @@ function HomePage() {
           <p className="text-center text-[11px] font-bold uppercase tracking-[0.3em] text-charcoal/40 mb-8">
             Trusted by property managers, clinics & offices across the GTA
           </p>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6 items-center">
+          <Stagger className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
             {PARTNERS.map((p) => (
-              <div
-                key={p}
-                className="font-heading font-bold text-center text-charcoal/40 hover:text-charcoal transition-colors text-sm tracking-tight"
-              >
-                {p}
-              </div>
+              <StaggerItem key={p.name}>
+                <PartnerLogo name={p.name} tag={p.tag} Icon={p.Icon} />
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </div>
       </section>
 
@@ -296,8 +329,9 @@ function HomePage() {
                 </span>
               </h2>
               <p className="text-charcoal/60 text-lg mb-8 leading-relaxed">
-                Drag the slider to reveal what an Inter-Cleaning visit looks like — every surface
-                detailed, every corner reset, ready for the moments that matter.
+                Browse a gallery of real transformations across the GTA. Drag the slider on each
+                image to reveal the difference an Inter-Cleaning visit makes — and tap the arrows
+                to switch rooms.
               </p>
               <ul className="space-y-3 mb-10">
                 {[
@@ -324,7 +358,7 @@ function HomePage() {
           </div>
           <div className="lg:col-span-7">
             <Reveal delay={0.15}>
-              <BeforeAfter image={beforeAfter} alt="Living room before and after professional cleaning" />
+              <BeforeAfterGallery pairs={BA_PAIRS} />
             </Reveal>
           </div>
         </div>
@@ -433,63 +467,91 @@ function HomePage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16 max-w-2xl mx-auto">
             <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-magenta block mb-4">
-              Client Stories
+              Google Reviews
             </span>
             <h2 className="font-heading text-4xl md:text-5xl font-bold tracking-tight">
               Rated 5 stars by GTA homes & businesses.
             </h2>
+            <p className="text-charcoal/60 mt-5">
+              Real reviews from real clients — straight from our Google Business profile.
+            </p>
           </div>
           <Stagger className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              {
-                q: "The team is punctual, thorough and genuinely cares about the details. Our condo has never looked better.",
-                n: "Sarah M.",
-                r: "Residential client · Downtown Toronto",
-                a: avatar1,
-              },
-              {
-                q: "We switched our office cleaning to Inter-Cleaning six months ago — the difference in our space is night and day.",
-                n: "Marc D.",
-                r: "Office Manager · Mississauga",
-                a: avatar2,
-              },
-              {
-                q: "Move-out cleaning that actually passed inspection on the first try. Got my full deposit back.",
-                n: "Priya K.",
-                r: "Tenant · Brampton",
-                a: avatar3,
-              },
-            ].map((t, i) => (
-              <StaggerItem key={i}>
-                <figure className="bg-white p-8 rounded-3xl ring-1 ring-charcoal/5 flex flex-col h-full hover:-translate-y-1 hover:shadow-[0_25px_50px_-20px_rgba(0,0,0,0.2)] transition-all">
-                  <div className="flex gap-0.5 mb-4">
-                    {Array.from({ length: 5 }).map((_, j) => (
-                      <Star key={j} className="w-4 h-4 fill-yellow text-yellow" />
-                    ))}
-                  </div>
-                  <blockquote className="text-charcoal/80 leading-relaxed mb-6 flex-1 text-[15px]">
-                    &ldquo;{t.q}&rdquo;
-                  </blockquote>
-                  <figcaption className="flex items-center gap-3 pt-4 border-t border-charcoal/5">
-                    <img
-                      src={t.a}
-                      alt={t.n}
-                      loading="lazy"
-                      width={48}
-                      height={48}
-                      className="w-12 h-12 rounded-full object-cover ring-2 ring-magenta/20"
-                    />
-                    <div>
-                      <div className="font-bold text-sm">{t.n}</div>
-                      <div className="text-xs text-charcoal/50 mt-0.5">{t.r}</div>
-                    </div>
-                  </figcaption>
-                </figure>
+            {GOOGLE_REVIEWS.map((r) => (
+              <StaggerItem key={r.name}>
+                <GoogleReviewCard {...r} />
               </StaggerItem>
             ))}
           </Stagger>
         </div>
       </section>
+
+      {/* LATEST FROM THE BLOG */}
+      {latestPosts.length > 0 && (
+        <section className="py-24 md:py-32 bg-white">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+              <div className="max-w-2xl">
+                <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-magenta mb-4 block">
+                  From the blog
+                </span>
+                <h2 className="font-heading text-4xl md:text-5xl font-bold tracking-tight">
+                  Tips, stories &{" "}
+                  <span className="bg-gradient-to-r from-magenta to-orange bg-clip-text text-transparent">
+                    fresh ideas.
+                  </span>
+                </h2>
+              </div>
+              <Link
+                to="/blog"
+                className="text-magenta font-bold text-sm uppercase tracking-wider flex items-center gap-2 hover:gap-3 transition-all"
+              >
+                View all articles <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+            <Stagger className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {latestPosts.map((p) => (
+                <StaggerItem key={p.id}>
+                  <Link
+                    to="/blog/$slug"
+                    params={{ slug: p.slug }}
+                    className="group block bg-white rounded-3xl ring-1 ring-charcoal/10 overflow-hidden hover:-translate-y-1 hover:shadow-[0_30px_60px_-20px_rgba(0,0,0,0.2)] transition-all h-full flex flex-col"
+                  >
+                    <div className="aspect-[16/10] bg-zinc-100 overflow-hidden">
+                      {p.cover_image ? (
+                        <img
+                          src={p.cover_image}
+                          alt={p.title}
+                          loading="lazy"
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-gradient-to-br from-magenta/20 via-orange/10 to-yellow/20" />
+                      )}
+                    </div>
+                    <div className="p-7 flex flex-col flex-1">
+                      <div className="text-[11px] font-bold uppercase tracking-[0.25em] text-charcoal/40 mb-3">
+                        {p.published_at ? new Date(p.published_at).toLocaleDateString() : ""}
+                      </div>
+                      <h3 className="font-heading text-lg font-bold mb-3 leading-tight group-hover:text-magenta transition-colors">
+                        {p.title}
+                      </h3>
+                      {p.excerpt && (
+                        <p className="text-sm text-charcoal/60 leading-relaxed flex-1 line-clamp-3">
+                          {p.excerpt}
+                        </p>
+                      )}
+                      <div className="mt-5 flex items-center gap-2 text-magenta font-bold text-xs uppercase tracking-wider">
+                        Read article <ArrowRight className="w-4 h-4" />
+                      </div>
+                    </div>
+                  </Link>
+                </StaggerItem>
+              ))}
+            </Stagger>
+          </div>
+        </section>
+      )}
 
       {/* CTA */}
       <section className="py-24 md:py-32 bg-white">
