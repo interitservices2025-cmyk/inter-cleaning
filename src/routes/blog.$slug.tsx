@@ -13,7 +13,7 @@ const postQO = (slug: string) =>
   });
 
 export const Route = createFileRoute("/blog/$slug")({
-  head: ({ loaderData }) => ({
+  head: ({ loaderData }: { loaderData?: { title: string; excerpt: string | null; cover_image: string | null } }) => ({
     meta: [
       { title: loaderData ? `${loaderData.title} — Blog` : "Article" },
       { name: "description", content: loaderData?.excerpt ?? "Inter-Cleaning Services blog." },
